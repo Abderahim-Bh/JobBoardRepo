@@ -4,7 +4,7 @@ from django.shortcuts import render
 
 
 def jobList(request):
-    return render(request,'')
+    return render(request, 'jobList.html')
 
 def jobDetails(request, id):
     pass
