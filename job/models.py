@@ -3,6 +3,13 @@ from django.db import models
 # Create your models here.
 
 
+class CategoryModel(models.Model):
+    name = models.CharField(max_length=25)
+
+    def __str__(self):
+        return self.name
+
+
 JOB_TYPE = [
     ('Full time','Full time'),
     ('Part time','Part time')
@@ -18,6 +25,7 @@ class JobModel(models.Model):
     vacancy = models.IntegerField(default=1)
     salary = models.DecimalField(default=0, decimal_places=2, max_digits=5)
     experience = models.IntegerField(default=1)
-
+    category = models.ForeignKey(CategoryModel, on_delete=models.CASCADE, null=True)
+    
     def __str__(self):
-        return self.title
+        return self.title    
