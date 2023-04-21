@@ -1,10 +1,21 @@
 from django.shortcuts import render
+from . models import JobModel
 
 # Create your views here.
 
 
+def home(request):
+    return render(request, 'pages/home.html')
+
 def jobList(request):
-    return render(request, 'jobList.html')
+    
+    context= {
+        'jobs': JobModel.objects.all()
+    }
+    return render(request, 'pages/jobList.html', context)
 
 def jobDetails(request, id):
-    pass
+    context= {
+        'jobs': JobModel.objects.get(id=id)
+    }
+    return render(request, 'pages/jobDetails.html', context)
