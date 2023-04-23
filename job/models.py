@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.text import slugify
 
 # Create your models here.
 
@@ -16,6 +17,10 @@ JOB_TYPE = [
 ]
 
 class JobModel(models.Model):
+    
+    def imageGenerator(instance, fileName):
+        imageName , extension = fileName.split(".")
+        return f"jobsImages/{instance.id}.{extension}"
 
     title = models.CharField(max_length=100)
     #location
@@ -26,6 +31,11 @@ class JobModel(models.Model):
     salary = models.DecimalField(default=0, decimal_places=2, max_digits=5)
     experience = models.IntegerField(default=1)
     category = models.ForeignKey(CategoryModel, on_delete=models.CASCADE, null=True)
+    image = models.ImageField(upload_to = imageGenerator, null=True)
+    slug = models.SlugField(null=True, blank=True)
     
+    def save(self, *args,**kwargs):
+        self.slug = slugify(self.title)
+        super(JobModel,self).save(*args,**kwargs)
     def __str__(self):
         return self.title    

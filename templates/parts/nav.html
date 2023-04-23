@@ -1,5 +1,5 @@
 
-
+{% load static %}
 {% block content%}
     <!-- header-start -->
     <header>
@@ -10,8 +10,8 @@
                         <div class="row align-items-center">
                             <div class="col-xl-3 col-lg-2">
                                 <div class="logo">
-                                    <a href="index.html">
-                                        <img src="img/logo.png" alt="">
+                                    <a href="{% url 'homePage' %}">
+                                        <img src="{% static 'img/logo.png' %}" alt="">
                                     </a>
                                 </div>
                             </div>
@@ -19,8 +19,8 @@
                                 <div class="main-menu  d-none d-lg-block">
                                     <nav>
                                         <ul id="navigation">
-                                            <li><a href="index.html">home</a></li>
-                                            <li><a href="jobs.html">Browse Job</a></li>
+                                            <li><a href="{% url 'homePage' %}">home</a></li>
+                                            <li><a href="{% url 'jobListPage' %}">Browse Job</a></li>
                                             <li><a href="#">pages <i class="ti-angle-down"></i></a>
                                                 <ul class="submenu">
                                                     <li><a href="candidate.html">Candidates </a></li>
