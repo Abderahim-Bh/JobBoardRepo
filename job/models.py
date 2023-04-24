@@ -39,3 +39,17 @@ class JobModel(models.Model):
         super(JobModel,self).save(*args,**kwargs)
     def __str__(self):
         return self.title    
+
+
+
+class Candidates(models.Model):
+    job = models.ForeignKey(JobModel, on_delete=models.CASCADE, null=True)
+    name = models.CharField(max_length=50)
+    email = models.EmailField(max_length=100)
+    website = models.URLField()
+    cv = models.FileField(upload_to="apply/")
+    coverLetter = models.TextField(max_length=100)
+    createdAt = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.name
