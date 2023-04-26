@@ -3,6 +3,7 @@ from . models import JobModel
 from django.core.paginator import Paginator
 from . forms import ApplyForm, JobModelForm
 from django.contrib.auth.decorators import login_required
+from . filters import jobFilter
 
 # Create your views here.
 
@@ -17,15 +18,22 @@ def home(request):
 def jobList(request):
     
     jobsObject = JobModel.objects.all()
+    myFilter = jobFilter(request.GET, queryset=jobsObject)
+    jobsObject = myFilter.qs
+
     paginator = Paginator(jobsObject,5)
     pageNumber = request.GET.get('page')
     pageObject = paginator.get_page(pageNumber)
 
     context= {
         'jobs': pageObject,
-        'jobsCount': JobModel.objects.count(), 
+        'jobsCount': JobModel.objects.count(),
+        'myFilter' : myFilter 
     }
     return render(request, 'pages/jobList.html', context)
+
+
+
 
 def jobDetails(request, slug):
     jobObject = JobModel.objects.get(slug=slug)

@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'job',
     'django_bootstrap5',
     'django_countries',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
