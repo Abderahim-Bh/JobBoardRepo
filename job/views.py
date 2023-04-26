@@ -2,6 +2,7 @@ from django.shortcuts import redirect, render
 from . models import JobModel
 from django.core.paginator import Paginator
 from . forms import ApplyForm, JobModelForm
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -45,6 +46,7 @@ def jobDetails(request, slug):
     return render(request, 'pages/jobDetails.html', context)
 
 
+@login_required
 def postJob(request):
 
     if request.method == "POST":
