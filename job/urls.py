@@ -5,5 +5,6 @@ urlpatterns = [
     path('', views.home, name='homePage'),
     path('jobs', views.jobList,name='jobListPage'),
     path('jobs/<str:slug>', views.jobDetails,name='jobDetailsPage'),
+    path('postJob', views.postJob, name='postJobPage'),
 ]
 

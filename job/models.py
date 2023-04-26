@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.text import slugify
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -21,12 +22,12 @@ class JobModel(models.Model):
     def imageGenerator(instance, fileName):
         imageName , extension = fileName.split(".")
         return f"jobsImages/{instance.id}.{extension}"
-
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     #location
     jobType = models.CharField(max_length=50, choices=JOB_TYPE)
     description = models.TextField(max_length=1000, null=True)
-    published_at = models.DateTimeField(auto_now=True)
+    published_at = models.DateTimeField(auto_now=True, null=True)
     vacancy = models.IntegerField(default=1)
     salary = models.DecimalField(default=0, decimal_places=2, max_digits=5)
     experience = models.IntegerField(default=1)
